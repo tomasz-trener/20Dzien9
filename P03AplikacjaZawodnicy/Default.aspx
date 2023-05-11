@@ -8,6 +8,12 @@
             <div class="card-header">
                 <h4 class="card-title">Simple Table</h4>
             </div>
+
+            <div style="margin-left:15px">
+                 <a href="SzczegolyZawodnikaForm.aspx" >Stwórz nowy rekord</a>
+            </div>
+           
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">

@@ -7,7 +7,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">Edit Profile</h5>
+                    <h5 class="title">
+                        <%= TrybOperacji == P03AplikacjaZawodnicy.TrybOperacji.Edycja? "Edycja": "Tworzenie" %>
+                    </h5>
                 </div>
                 <div class="card-body">
                     <form>
@@ -16,12 +18,14 @@
                                 <div class="form-group">
                                     <label>Id</label>
                                      <asp:TextBox CssClass="form-control" ID="txtId" Enabled="false" runat="server"></asp:TextBox>
+                                   
                                 </div>
                             </div>
                             <div class="col-md-5 px-1">
                                 <div class="form-group">
                                     <label>Imie</label>
                                     <asp:TextBox CssClass="form-control" ID="txtImie" runat="server"></asp:TextBox>
+                                     <asp:RequiredFieldValidator  ControlToValidate="txtImie" runat="server" ErrorMessage="Uzupełnij imie"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="col-md-5 pl-1">
@@ -71,6 +75,7 @@
                         </div>
 
                         <asp:Button ID="btnZapisz" CssClass="btn btn-primary" OnClick="btnZapisz_Click" runat="server" Text="Zapisz" />
+                        <asp:Button ID="btnUsun" CssClass="btn btn-primary" OnClick="btnUsun_Click" runat="server" Text="Usuń" />
 
                     </form>
                 </div>

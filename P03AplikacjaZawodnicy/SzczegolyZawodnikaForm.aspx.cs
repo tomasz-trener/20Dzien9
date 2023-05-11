@@ -9,8 +9,19 @@ using System.Web.UI.WebControls;
 
 namespace P03AplikacjaZawodnicy
 {
+    public enum TrybOperacji
+    {
+        Tworzenie,
+        Edycja
+    }
+
     public partial class SzczegolyZawodnikaForm : System.Web.UI.Page
     {
+
+
+        public TrybOperacji TrybOperacji => 
+            string.IsNullOrEmpty(Request["id"]) ? TrybOperacji.Tworzenie : TrybOperacji.Edycja; 
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,13 +41,16 @@ namespace P03AplikacjaZawodnicy
                 txtWaga.Text = Convert.ToString(zawodnik.Waga);
                 txtWzrost.Text = Convert.ToString(zawodnik.Wzrost);
                 txtDataUr.Text = zawodnik.DataSformatowana;
-            }  
+            }
+
+            btnUsun.Visible = TrybOperacji == TrybOperacji.Edycja;
+
         }
 
         protected void btnZapisz_Click(object sender, EventArgs e)
         {
             Zawodnik zawodnik = new Zawodnik();
-            zawodnik.Id_zawodnika = Convert.ToInt32(txtId.Text);
+     
             zawodnik.Imie = txtImie.Text;
             zawodnik.Nazwisko = txtNazwisko.Text;
             zawodnik.Kraj = txtKraj.Text;
@@ -45,10 +59,25 @@ namespace P03AplikacjaZawodnicy
             zawodnik.Wzrost = Convert.ToInt32(txtWzrost.Text);
 
             ManagerZawodnikow managerZawodnikow = new ManagerZawodnikow();
-            managerZawodnikow.Edytuj(zawodnik);
-
+            
+            if(string.IsNullOrEmpty(txtId.Text)) // dodawania 
+                managerZawodnikow.Dodaj(zawodnik);
+            else // edycja 
+            {
+                zawodnik.Id_zawodnika = Convert.ToInt32(txtId.Text);
+                managerZawodnikow.Edytuj(zawodnik);
+            }
+              
             Response.Redirect("Default.aspx");
 
+        }
+
+        protected void btnUsun_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(txtId.Text);
+            ManagerZawodnikow managerZawodnikow = new ManagerZawodnikow();
+            managerZawodnikow.Usun(id);
+            Response.Redirect("Default.aspx");
         }
     }
 }
