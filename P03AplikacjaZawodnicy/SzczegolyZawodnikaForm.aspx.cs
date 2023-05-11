@@ -30,9 +30,7 @@ namespace P03AplikacjaZawodnicy
                 txtWaga.Text = Convert.ToString(zawodnik.Waga);
                 txtWzrost.Text = Convert.ToString(zawodnik.Wzrost);
                 txtDataUr.Text = zawodnik.DataSformatowana;
-            }
-
-            
+            }  
         }
 
         protected void btnZapisz_Click(object sender, EventArgs e)
