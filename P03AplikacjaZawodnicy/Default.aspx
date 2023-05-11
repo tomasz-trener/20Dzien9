@@ -31,7 +31,7 @@
                                 {%>
 
                             <tr>
-                                <td><%= z.Imie + " " + z.Nazwisko %></td>
+                                <td><a href="SzczegolyZawodnikaForm.aspx?id=<%= z.Id_zawodnika %>"> <%= z.Imie + " " + z.Nazwisko %> </a></td>
                                 <td><%= z.Kraj %></td>
                                 <td><%= z.DataSformatowana %></td>
                                 <td><%= z.Wzrost %></td>
